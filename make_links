@@ -12,6 +12,7 @@ echo "    .tmux.conf"
 echo "    .vimrc"
 echo "    .zshrc"
 echo "    .zshrc.d"
+echo "    .config/karabiner"
 echo
 read -p "Proceed? (y/N): " -n 1 -r
 echo
@@ -32,6 +33,9 @@ then
     ln -s $SCRIPT_DIR/.vimrc        ~/.vimrc
     ln -s $SCRIPT_DIR/.zshrc        ~/.zshrc
     ln -s $SCRIPT_DIR/.zshrc.d      ~/.zshrc.d
+    mkdir -p ~/.config
+    [ -e ~/.config/karabiner ] && trash ~/.config/karabiner
+    ln -s $SCRIPT_DIR/karabiner     ~/.config/karabiner
     echo
     echo Done.
     ls -o ~/.gitconfig
@@ -41,6 +45,7 @@ then
     ls -o ~/.vimrc
     ls -o ~/.zshrc
     ls -o ~/.zshrc.d
+    ls -o ~/.config/karabiner
     echo
 else
     echo Denied!
