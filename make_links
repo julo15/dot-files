@@ -35,7 +35,9 @@ then
     ln -s $SCRIPT_DIR/.zshrc.d      ~/.zshrc.d
     mkdir -p ~/.config
     [ -e ~/.config/karabiner ] && trash ~/.config/karabiner
-    ln -s $SCRIPT_DIR/karabiner     ~/.config/karabiner
+    # Karabiner's core service runs as root and cannot follow symlinks,
+    # so we copy instead of symlinking.
+    cp -R $SCRIPT_DIR/karabiner     ~/.config/karabiner
     echo
     echo Done.
     ls -o ~/.gitconfig

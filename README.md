@@ -52,6 +52,9 @@ Create local files as needed, then customize locally. The `*.local.*` files are 
 # Add unix-config/scripts directory to your shell PATH (for example in .zshrc)
 
 brew install --cask karabiner-elements
+# Note: Karabiner config is copied (not symlinked) by make_links because
+# Karabiner's core service runs as root and cannot follow symlinks.
+# Re-run make_links after editing karabiner/ to pick up changes.
 brew install git
 brew install git-delta
 brew install yarn
