@@ -1,0 +1,142 @@
+{
+    "global": { "show_in_menu_bar": false },
+    "profiles": [
+        {
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "XCode: kj",
+                        "enabled": false,
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.apple.dt.Xcode"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    },
+                                    {
+                                        "name": "k_pressed",
+                                        "type": "variable_unless",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "k" },
+                                "parameters": { "basic.to_delayed_action_delay_milliseconds": 500 },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "k_pressed",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_delayed_action": {
+                                    "to_if_invoked": [
+                                        {
+                                            "set_variable": {
+                                                "name": "k_pressed",
+                                                "value": 0
+                                            }
+                                        }
+                                    ]
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.apple.dt.Xcode"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    },
+                                    {
+                                        "name": "k_pressed",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "j" },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "k_pressed",
+                                            "value": 0
+                                        }
+                                    },
+                                    {
+                                        "key_code": "escape",
+                                        "modifiers": []
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 28705,
+                        "vendor_id": 1256
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "apple_vendor_top_case_key_code": "keyboard_fn" },
+                            "to": [{ "key_code": "left_control" }]
+                        },
+                        {
+                            "from": { "key_code": "caps_lock" },
+                            "to": [{ "key_code": "grave_accent_and_tilde" }]
+                        },
+                        {
+                            "from": { "key_code": "grave_accent_and_tilde" },
+                            "to": [{ "key_code": "escape" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 264,
+                        "vendor_id": 12046
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "left_command" },
+                            "to": [{ "key_code": "left_option" }]
+                        },
+                        {
+                            "from": { "key_code": "left_option" },
+                            "to": [{ "key_code": "left_command" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 8455,
+                        "vendor_id": 16700
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "left_command" },
+                            "to": [{ "key_code": "left_option" }]
+                        },
+                        {
+                            "from": { "key_code": "left_option" },
+                            "to": [{ "key_code": "left_command" }]
+                        }
+                    ]
+                }
+            ],
+            "name": "Default profile",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+        }
+    ]
+}

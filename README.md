@@ -51,6 +51,7 @@ Create local files as needed, then customize locally. The `*.local.*` files are 
 # Install vundle: https://github.com/VundleVim/Vundle.vim
 # Add unix-config/scripts directory to your shell PATH (for example in .zshrc)
 
+brew install --cask karabiner-elements
 brew install git
 brew install git-delta
 brew install yarn
