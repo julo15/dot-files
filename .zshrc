@@ -48,7 +48,7 @@ parse_git_status() {
 
 alias l="ls -l --color"
 alias md="mkdir"
-alias c=goup
+alias x=goup
 alias d=cdl
 alias esource="vi ~/.zshrc"
 alias gs="git status"
@@ -121,4 +121,11 @@ if [ -d "$HOME/.zshrc.d" ]; then
   for file in "$HOME/.zshrc.d/"*.local.zsh(.N); do
     [ -f "$file" ] && source "$file"
   done
+fi
+
+# dcg: warn if hook was silently removed from Claude Code settings
+if command -v dcg &>/dev/null && command -v jq &>/dev/null; then
+  if [ -f "$HOME/.claude/settings.json" ] &&      ! jq -e '.hooks.PreToolUse[]? | select(.hooks[]?.command | test("dcg$"))'        "$HOME/.claude/settings.json" &>/dev/null; then
+    printf '\033[1;33m[dcg] Hook missing from ~/.claude/settings.json — run: dcg install\033[0m\n'
+  fi
 fi
