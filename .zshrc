@@ -1,3 +1,6 @@
+# Interactive shell configuration — aliases, functions, prompt, completions
+# Environment variables and PATH are in .zshenv (loaded for all shell types)
+
 # Functions
 
 cdl() {
@@ -59,6 +62,8 @@ alias gds="git diff --staged"
 alias jwt=jwt
 alias pjq="pbpaste | jq"
 alias sp="spatialite"
+alias cls='claude --dangerously-skip-permissions'
+alias cdls='codex --dangerously-bypass-approvals-and-sandbox'
 
 # History
 HISTFILE=~/.zsh_history
@@ -81,47 +86,8 @@ autoload -Uz compinit && compinit
 setopt prompt_subst
 PROMPT='%F{51}%~%F{5}$(parse_git_branch)%F{7}$(parse_git_status)%F{2}$%f '
 
-# Exports
-
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-export PATH=$PATH:~/Documents/unix-config/scripts
-export PATH=$PATH:/opt/homebrew/bin
-
-export PATH=$PATH:$HOME/.mint/bin
-
-export PATH=~/.asdf/shims:$PATH
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This lo
-
-
-# Ruby
-# eval "$(rbenv init - zsh)"
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-
-alias cls='claude --dangerously-skip-permissions'
-alias cdls='codex --dangerously-bypass-approvals-and-sandbox'
-
-# Added as suggested by Claude Code
-export PATH="$HOME/.local/bin:$PATH"
-
-# Codex
-export CODEX_HOME="$HOME/.agents"
-
-# Local overrides and secrets (untracked)
-[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
-if [ -d "$HOME/.zshrc.d" ]; then
-  for file in "$HOME/.zshrc.d/"*.local.zsh(.N); do
-    [ -f "$file" ] && source "$file"
-  done
-fi
+# nvm bash completion (interactive only)
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # dcg: warn if hook was silently removed from Claude Code settings
 if command -v dcg &>/dev/null && command -v jq &>/dev/null; then

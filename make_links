@@ -10,6 +10,7 @@ echo "    .inputrc"
 echo "    .jumpdests"
 echo "    .tmux.conf"
 echo "    .vimrc"
+echo "    .zshenv"
 echo "    .zshrc"
 echo "    .zshrc.d"
 echo "    .config/karabiner"
@@ -24,6 +25,7 @@ then
     [ -e ~/.jumpdests ] && trash ~/.jumpdests
     [ -e ~/.tmux.conf ] && trash ~/.tmux.conf
     [ -e ~/.vimrc ] && trash ~/.vimrc
+    [ -e ~/.zshenv ] && trash ~/.zshenv
     [ -e ~/.zshrc ] && trash ~/.zshrc
     [ -e ~/.zshrc.d ] && trash ~/.zshrc.d
     ln -s $SCRIPT_DIR/.gitconfig    ~/.gitconfig
@@ -31,6 +33,7 @@ then
     ln -s $SCRIPT_DIR/.jumpdests    ~/.jumpdests
     ln -s $SCRIPT_DIR/.tmux.conf    ~/.tmux.conf
     ln -s $SCRIPT_DIR/.vimrc        ~/.vimrc
+    ln -s $SCRIPT_DIR/.zshenv       ~/.zshenv
     ln -s $SCRIPT_DIR/.zshrc        ~/.zshrc
     ln -s $SCRIPT_DIR/.zshrc.d      ~/.zshrc.d
     mkdir -p ~/.config
@@ -45,6 +48,7 @@ then
     ls -o ~/.jumpdests
     ls -o ~/.tmux.conf
     ls -o ~/.vimrc
+    ls -o ~/.zshenv
     ls -o ~/.zshrc
     ls -o ~/.zshrc.d
     ls -o ~/.config/karabiner
