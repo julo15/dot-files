@@ -181,6 +181,11 @@
   //   },
 
   "sidebarAppearance": {
-    "matchTerminalBackground": true
+    "matchTerminalBackground": true,
+    "tintOpacity": 1.0
+  },
+
+  "workspaceColors": {
+    "selectionColor": "#A67C2E"
   }
 }
