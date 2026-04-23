@@ -13,6 +13,7 @@ echo "    .vimrc"
 echo "    .zshenv"
 echo "    .zshrc"
 echo "    .zshrc.d"
+echo "    .config/ghostty"
 echo "    .config/karabiner"
 echo
 read -p "Proceed? (y/N): " -n 1 -r
@@ -37,6 +38,8 @@ then
     ln -s $SCRIPT_DIR/.zshrc        ~/.zshrc
     ln -s $SCRIPT_DIR/.zshrc.d      ~/.zshrc.d
     mkdir -p ~/.config
+    [ -e ~/.config/ghostty ] && trash ~/.config/ghostty
+    ln -s $SCRIPT_DIR/.config/ghostty ~/.config/ghostty
     [ -e ~/.config/karabiner ] && trash ~/.config/karabiner
     # Karabiner's core service runs as root and cannot follow symlinks,
     # so we copy instead of symlinking.
@@ -51,6 +54,7 @@ then
     ls -o ~/.zshenv
     ls -o ~/.zshrc
     ls -o ~/.zshrc.d
+    ls -o ~/.config/ghostty
     ls -o ~/.config/karabiner
     echo
 else

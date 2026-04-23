@@ -1,0 +1,27 @@
+font-family = Menlo
+font-size = 13
+font-thicken = true
+adjust-cell-height = 20%
+
+window-width = 125
+window-height = 38
+
+background = #000000
+background-opacity = 0.81
+background-blur = true
+
+foreground = #FFE0A4
+cursor-color = #BB5600
+selection-background = #52483E
+bold-color = #FFBF20
+
+palette = 1=#FF9591
+palette = 2=#73EA5F
+palette = 3=#FFEA69
+palette = 4=#A8D4FF
+palette = 5=#E39DE0
+palette = 6=#49CCDF
+palette = 7=#EBEBEB
+
+macos-option-as-alt = true
+macos-titlebar-style = native
