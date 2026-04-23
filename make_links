@@ -15,6 +15,7 @@ echo "    .zshrc"
 echo "    .zshrc.d"
 echo "    .config/ghostty"
 echo "    .config/karabiner"
+echo "    ~/Library/Application Support/com.cmuxterm.app/config.ghostty"
 echo
 read -p "Proceed? (y/N): " -n 1 -r
 echo
@@ -44,6 +45,13 @@ then
     # Karabiner's core service runs as root and cannot follow symlinks,
     # so we copy instead of symlinking.
     cp -R $SCRIPT_DIR/karabiner     ~/.config/karabiner
+    # cmux is Ghostty-based and reads its config from Application Support.
+    # Point it at the same Ghostty config so both terminals stay in sync.
+    # A config-file include doesn't work here (cmux's config loader doesn't
+    # chain), so symlink the physical file directly.
+    mkdir -p ~/"Library/Application Support/com.cmuxterm.app"
+    [ -e ~/"Library/Application Support/com.cmuxterm.app/config.ghostty" ] && trash ~/"Library/Application Support/com.cmuxterm.app/config.ghostty"
+    ln -s "$SCRIPT_DIR/.config/ghostty/config.ghostty" ~/"Library/Application Support/com.cmuxterm.app/config.ghostty"
     echo
     echo Done.
     ls -o ~/.gitconfig
@@ -56,6 +64,7 @@ then
     ls -o ~/.zshrc.d
     ls -o ~/.config/ghostty
     ls -o ~/.config/karabiner
+    ls -o ~/"Library/Application Support/com.cmuxterm.app/config.ghostty"
     echo
 else
     echo Denied!
