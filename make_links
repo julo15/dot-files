@@ -13,6 +13,7 @@ echo "    .vimrc"
 echo "    .zshenv"
 echo "    .zshrc"
 echo "    .zshrc.d"
+echo "    .config/cmux"
 echo "    .config/ghostty"
 echo "    .config/karabiner"
 echo
@@ -38,6 +39,8 @@ then
     ln -s $SCRIPT_DIR/.zshrc        ~/.zshrc
     ln -s $SCRIPT_DIR/.zshrc.d      ~/.zshrc.d
     mkdir -p ~/.config
+    [ -e ~/.config/cmux ] && trash ~/.config/cmux
+    ln -s $SCRIPT_DIR/.config/cmux ~/.config/cmux
     [ -e ~/.config/ghostty ] && trash ~/.config/ghostty
     ln -s $SCRIPT_DIR/.config/ghostty ~/.config/ghostty
     [ -e ~/.config/karabiner ] && trash ~/.config/karabiner
@@ -54,6 +57,7 @@ then
     ls -o ~/.zshenv
     ls -o ~/.zshrc
     ls -o ~/.zshrc.d
+    ls -o ~/.config/cmux
     ls -o ~/.config/ghostty
     ls -o ~/.config/karabiner
     echo
