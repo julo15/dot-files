@@ -36,6 +36,31 @@ jwt() {
     jq -R 'split(".") | .[1] | @base64d | fromjson' <<< "$1"
 }
 
+killdevservers() {
+    local dry_run=0
+    if [[ "$1" == "--dry-run" || "$1" == "-n" ]]; then
+        dry_run=1
+    fi
+    local runtimes='node|python|python3|python3\.[0-9]+|ruby|go|deno|bun'
+    local pids=$(lsof -iTCP -sTCP:LISTEN -n -P 2>/dev/null | awk -v r="$runtimes" 'NR>1 && $1 ~ r {print $2}' | sort -u)
+    if [ -z "$pids" ]; then
+        echo "No dev servers found."
+        return
+    fi
+    if (( dry_run )); then
+        echo "Dev servers that would be killed:"
+    else
+        echo "Killing dev servers:"
+    fi
+    lsof -iTCP -sTCP:LISTEN -n -P 2>/dev/null | awk -v r="$runtimes" 'NR>1 && $1 ~ r {print "  " $1, "(pid " $2 ")", $9}' | sort -u
+    if (( dry_run )); then
+        echo "Run without --dry-run to kill them."
+    else
+        echo "$pids" | xargs kill
+        echo "Done."
+    fi
+}
+
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
 }
@@ -88,6 +113,9 @@ PROMPT='%F{51}%~%F{5}$(parse_git_branch)%F{7}$(parse_git_status)%F{2}$%f '
 
 # nvm bash completion (interactive only)
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+# Ensure asdf shims take priority (macOS default paths can push /usr/bin ahead)
+export PATH=~/.asdf/shims:$PATH
 
 # dcg: warn if hook was silently removed from Claude Code settings
 if command -v dcg &>/dev/null && command -v jq &>/dev/null; then
