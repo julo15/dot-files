@@ -13,8 +13,10 @@ echo "    .vimrc"
 echo "    .zshenv"
 echo "    .zshrc"
 echo "    .zshrc.d"
+echo "    .config/cmux"
 echo "    .config/ghostty"
 echo "    .config/karabiner"
+echo "    ~/Library/Application Support/com.cmuxterm.app/config.ghostty"
 echo
 read -p "Proceed? (y/N): " -n 1 -r
 echo
@@ -38,12 +40,22 @@ then
     ln -s $SCRIPT_DIR/.zshrc        ~/.zshrc
     ln -s $SCRIPT_DIR/.zshrc.d      ~/.zshrc.d
     mkdir -p ~/.config
+    [ -e ~/.config/cmux ] && trash ~/.config/cmux
+    ln -s $SCRIPT_DIR/.config/cmux ~/.config/cmux
     [ -e ~/.config/ghostty ] && trash ~/.config/ghostty
     ln -s $SCRIPT_DIR/.config/ghostty ~/.config/ghostty
     [ -e ~/.config/karabiner ] && trash ~/.config/karabiner
     # Karabiner's core service runs as root and cannot follow symlinks,
     # so we copy instead of symlinking.
     cp -R $SCRIPT_DIR/karabiner     ~/.config/karabiner
+    # cmux is Ghostty-based but reads its Ghostty config from Application
+    # Support. Point it at a cmux-specific config (not Ghostty's) so the
+    # two can diverge where cmux's SwiftUI renderer misbehaves — notably,
+    # cmux's alpha stacking makes background-opacity unusable, so the
+    # cmux config stays fully opaque while Ghostty keeps its translucency.
+    mkdir -p ~/"Library/Application Support/com.cmuxterm.app"
+    [ -e ~/"Library/Application Support/com.cmuxterm.app/config.ghostty" ] && trash ~/"Library/Application Support/com.cmuxterm.app/config.ghostty"
+    ln -s "$SCRIPT_DIR/.config/cmux/config.ghostty" ~/"Library/Application Support/com.cmuxterm.app/config.ghostty"
     echo
     echo Done.
     ls -o ~/.gitconfig
@@ -54,8 +66,10 @@ then
     ls -o ~/.zshenv
     ls -o ~/.zshrc
     ls -o ~/.zshrc.d
+    ls -o ~/.config/cmux
     ls -o ~/.config/ghostty
     ls -o ~/.config/karabiner
+    ls -o ~/"Library/Application Support/com.cmuxterm.app/config.ghostty"
     echo
 else
     echo Denied!
