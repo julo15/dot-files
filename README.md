@@ -5,19 +5,24 @@
 Clone this repo somewhere, then run:
 
 ```bash
-./make_links
-./scripts/install_hooks
+./setup.sh
 ```
+
+`setup.sh` is idempotent and runs each step in turn:
+
+1. `./make_links` — symlinks dotfiles into `~`
+2. `./scripts/install_hooks` — enables the git pre-commit hook
+3. `./scripts/macos-defaults.sh` — applies macOS system preferences (no-op on non-macOS)
+
+You can also run any step on its own.
 
 ## Pre-commit Hook
 
-This repo includes a git pre-commit hook at `.githooks/pre-commit` that blocks commits when likely secrets are detected in staged files.
+This repo includes a git pre-commit hook at `.githooks/pre-commit` that blocks commits when likely secrets are detected in staged files. `setup.sh` enables it via `./scripts/install_hooks`.
 
-Enable it once per clone:
+## macOS Defaults
 
-```bash
-./scripts/install_hooks
-```
+`./scripts/macos-defaults.sh` applies system preferences via `defaults write` (currently: faster keyboard repeat). It's invoked by `setup.sh` and a no-op on non-macOS. Some settings require a logout/login to take full effect.
 
 ## Local Secrets And Overrides
 
