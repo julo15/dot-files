@@ -37,7 +37,7 @@ Currently tracked domains:
 - `com.apple.AppleMultitouchTrackpad` — built-in trackpad gestures
 - `com.apple.universalaccess` — accessibility (incl. three-finger drag)
 
-After importing, log out and back in (or restart) for all changes to take effect.
+The export script strips transient bookkeeping keys (`History`) so the committed plists diff cleanly across runs. After importing, log out and back in (or restart) for all changes to take effect.
 
 ## Local Secrets And Overrides
 
