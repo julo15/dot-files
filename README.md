@@ -24,6 +24,21 @@ This repo includes a git pre-commit hook at `.githooks/pre-commit` that blocks c
 
 `./scripts/macos-defaults.sh` applies system preferences via `defaults write` (currently: faster keyboard repeat). It's invoked by `setup.sh` and a no-op on non-macOS. Some settings require a logout/login to take full effect.
 
+## macOS Preference Snapshots
+
+For complex System Settings panels (keyboard shortcuts, trackpad gestures, accessibility) where applying individual `defaults write` commands is tedious, this repo snapshots whole preference domains to `macos/prefs/`.
+
+- `./scripts/macos-prefs-export.sh` — dumps the tracked domains to XML plists in `macos/prefs/`. **Run manually** after changing System Settings, then review the diff and commit.
+- `./scripts/macos-prefs-import.sh` — restores the plists back into the live preference store. **Run manually** on a fresh machine after `setup.sh`. Will overwrite the current values of those domains, so don't run it if you've already configured this machine.
+
+Currently tracked domains:
+
+- `com.apple.symbolichotkeys` — system keyboard shortcuts
+- `com.apple.AppleMultitouchTrackpad` — built-in trackpad gestures
+- `com.apple.universalaccess` — accessibility (incl. three-finger drag)
+
+The export script strips transient bookkeeping keys (`History`) so the committed plists diff cleanly across runs. After importing, log out and back in (or restart) for all changes to take effect.
+
 ## Local Secrets And Overrides
 
 This repo intentionally keeps secrets out of tracked files.

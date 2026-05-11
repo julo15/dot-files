@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AccessibilityReaderHotkey</key>
+	<dict>
+		<key>AX_READER_HOTKEY_VIEW_IN_READER</key>
+		<dict>
+			<key>charCode</key>
+			<integer>65535</integer>
+			<key>keyCode</key>
+			<integer>53</integer>
+			<key>modifiers</key>
+			<integer>1048576</integer>
+		</dict>
+	</dict>
+	<key>closeViewHotkeysEnabled</key>
+	<false/>
+	<key>closeViewZoomDisplayID</key>
+	<integer>0</integer>
+	<key>closeViewZoomFactor</key>
+	<real>1</real>
+	<key>com.apple.custommenu.apps</key>
+	<array>
+		<string>NSGlobalDomain</string>
+	</array>
+	<key>liveSpeechEnabled</key>
+	<false/>
+	<key>login</key>
+	<false/>
+	<key>mouseDriver</key>
+	<false/>
+	<key>sessionChange</key>
+	<false/>
+	<key>slowKey</key>
+	<false/>
+	<key>slowKeyDelay</key>
+	<integer>250</integer>
+	<key>switchAutoScanElementInterval</key>
+	<real>0.5</real>
+	<key>switchAutoScanPanelInterval</key>
+	<real>0.5</real>
+	<key>switchCoalescePressesDuration</key>
+	<real>0.0</real>
+	<key>switchFirstElementDelay</key>
+	<real>0.0</real>
+	<key>switchHideUITimeout</key>
+	<real>15</real>
+	<key>switchHoldBeforeRepeatDuration</key>
+	<real>3</real>
+	<key>switchMinimumPressDuration</key>
+	<real>0.0</real>
+	<key>switchSweepingCursorSpeed</key>
+	<real>5</real>
+</dict>
+</plist>
